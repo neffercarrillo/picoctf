@@ -86,6 +86,8 @@ int buy_stonks(Portfolio *p) {
 
 	// TODO: Figure out how to read token from file, for now just ask
 
+        printf("HERE IS THE KEY: %s",api_buf);
+        
 	char *user_buf = malloc(300 + 1);
 	printf("What is your API token?\n");
 	scanf("%300s", user_buf);

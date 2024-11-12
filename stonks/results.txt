@@ -1,0 +1,22 @@
+Welcome back to the trading app!
+
+What would you like to do?
+1) Buy some stonks!
+2) View my portfolio
+Using patented AI algorithms to buy stonks
+Stonks chosen
+HERE IS THE KEY: fakeflaghere
+What is your API token?
+Buying stonks with token:
+1.1.eefc0240.e271f0e9.ef09aa80.f1836800.ff8372a0.656b6166.65726568.1.eefc0240.ef09a1f4.ef09a260.e2721080.ef0975e0.ef0f3020.eef49fd9.ef09b760.eef4a3e3.14.ef09b760.e271f169.eef3fada.f18369f8.ff8395a0.ff839580.f18368e0.ff8382d0.ef0f42e0.f18368e0.e271e6b2.f18369f8.ef0dcea0.0.ff8372a0.1.eeeef24a.f18369e0.e271e5de.e271d040.f18369f8
+Portfolio as of Mon Nov 11 11:49:15 PM PST 2024
+
+
+12 shares of SIKN
+43 shares of TS
+27 shares of JIBQ
+3 shares of YS
+472 shares of F
+430 shares of CVV
+113 shares of M
+Goodbye!
