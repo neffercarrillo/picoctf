@@ -6,7 +6,7 @@ I decided to try something noone else has before. I made a bot to automatically 
 
 ## Status
 
-In Progress
+Done
 
 ## Done
 
