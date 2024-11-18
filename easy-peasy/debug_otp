@@ -1,0 +1,98 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+use IPC::Open2;
+
+my $DEBUG = 1;
+
+sub debug {
+    my ($message) = @_;
+    if ($DEBUG) {
+        print "DEBUG $message\n";        
+    }
+}
+
+sub to_ascii {
+    my ($encoded_line) = @_;
+    my @split_line = split (//,$encoded_line);
+    my $start = 0;
+    my $stop = 1;
+    my @results;
+    my $result;
+    while($stop <= $#split_line) {
+        push(@results,chr hex $split_line[$start] . $split_line[$stop]);
+        $start = $stop + 1;
+        $stop = $stop + 2;
+    }
+    $result = join('',@results);
+    return $result;
+}
+
+sub capture_program_output {
+
+    my $encrypted_flag;
+    my @command;
+    my $KEY_LENGTH = 50000;
+  
+    my $TEST = 0;
+    
+    if ($TEST) {
+        # use local files
+        $encrypted_flag = "0d0918011a331733101d38455a5f5d1056404059";
+        @command = qw(python3 otp.py);
+    } else {
+        # access picoctf server
+        $encrypted_flag = "551e6c4c5e55644b56566d1b5100153d4004026a4b52066b4a5556383d4b0007"; 
+        @command = qw(nc mercury.picoctf.net 11188);        
+    }
+ 
+    my $encrypted_flag_to_ascii = to_ascii($encrypted_flag);
+    debug("encrypted flag to ascii: $encrypted_flag_to_ascii\n");
+    debug("encrypted flag to ascii length: " . length($encrypted_flag_to_ascii));
+    
+    # setup process
+    my $pid = open2(my $read_fh, my $write_fh, @command);
+    print "CLI App Interaction:\n";
+
+    # send commands to process
+    print $write_fh ("0" x ($KEY_LENGTH - length($encrypted_flag_to_ascii)) . "\n") . "$encrypted_flag_to_ascii\n" . "\n";
+    
+    # close process for writing
+    close($write_fh);
+
+    # work with the output of the process
+    my @program_output;
+
+    while(my $line = <$read_fh>){
+        push(@program_output,$line);
+    }
+    
+    waitpid($pid, 0);
+    
+    if ($? == 0) {
+        print"\nCLI App exited successfully.\n";
+    } else {
+        my $exit_code = $? >> 8;
+        print "\nCLI App exited with errors. Return code: $exit_code.\n";        
+    }
+    
+    return @program_output;
+    
+}
+
+sub process_program_output {
+    my (@captured_output) = @_;
+    my @processed_output;
+    for (@captured_output) {
+        print "decrypted string: " . to_ascii($_) . "\n" if $_ =~ /^[0-9a-e]/;
+    }
+    return @processed_output;
+}
+
+# get program output
+my @program_output = capture_program_output();
+print @program_output;
+
+# process program output
+my @processed_output = process_program_output(@program_output);

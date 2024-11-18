@@ -1,0 +1,87 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+use feature 'say';
+use Data::Dumper;
+
+while(<>) {
+    my $line = $_;
+    say "Attempting decryption of flag... $line";
+    my @chars = split(//,$line);
+    my $len = @chars;
+    my $start = 0;
+    my $end = 1;
+    my @unencrypted_flag;
+    my $group = 1;
+    my @allowed_p = initialize_allowed_p();
+    my @allowed_k = initialize_allowed_k();
+    while ($len > $end) {
+        my $encrypted_hex_value = $chars[$start] . $chars[$end];
+        #my $encrypted_dec_value = hex $encrypted_hex_value;
+        say "Possible decrypted flag fragment in group: $group -> encrypted hex: $encrypted_hex_value" ;
+        #my @possibilities = decrypt($encrypted_dec_value);
+        #my @possibilities = find_possible_combinations(\@allowed_p,\@allowed_k,$encrypted_hex_value); 
+        #print Dumper(@possibilities);
+        #push(@unencrypted_flag,@possibilities);
+        for (@allowed_p) {
+            my $p = $_;
+            for (@allowed_k){
+                my $k = $_;
+                #say "attempting combination: $p and $k";
+                my $ordp = ord($p);
+                my $calc_val = hex(ord($p)^$k);
+                if (hex(ord($p)^$k) eq $encrypted_hex_value) {
+                    say "BINGO! found possible p: $p";
+                    say "p:$p, ord(p): $ordp, k:$k, encrypted_hex:$encrypted_hex_value, calc val:$calc_val";
+                }
+            }
+        }
+        $start += 2;
+        $end += 2;
+        $group += 1;
+    }
+    #say @unencrypted_flag;
+}
+
+sub decrypt {
+    my $encrypted_dec_value = shift;
+    my @results;
+    for (1..255) {
+        my %values;
+        if ($encrypted_dec_value == 0) {
+            %values = ("k" => $_,"result" => chr(0));
+            push(@results,%values);
+            #push(@results,chr(0));
+        } else {
+            %values = ("k" => $_,"result" => chr(10**((log($encrypted_dec_value)/log(10))/$_)));
+            push(@results,%values);
+            #push(@results,chr(10**((log($encrypted_dec_value)/log(10))/$_)));
+            #print chr(10**((log($encrypted_dec_value)/log(10))/$_));             
+        }
+    }
+    return @results;
+}
+
+sub initialize_allowed_p {
+    my @results;
+    for ('a'..'z') {
+        push(@results,$_);
+    }
+    for ('A'..'Z'){
+        push(@results,$_);
+    }
+    for ('0'..'9'){
+        push(@results,$_);
+    }
+    push(@results,"_");
+    return @results;
+}
+
+sub initialize_allowed_k {
+    my @results;
+    for (1..255) {
+        push(@results,$_);
+    }
+    return @results;
+}
