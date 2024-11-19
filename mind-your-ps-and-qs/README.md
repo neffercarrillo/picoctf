@@ -4,7 +4,11 @@
 
 In RSA, a small e value can be problematic, but what about N? Can you decrypt this?
 
-## Done
+## Status
+
+Done
+
+## Notes
 
 1. Go to https://www.dcode.fr/rsa-cipher and enter the values for C, N and E then click Calculate/Decrypt.
 

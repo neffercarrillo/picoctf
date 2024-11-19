@@ -4,7 +4,11 @@
 
 Can you look at the data in this binary: static? This BASH script might help!
 
-## Done
+## Status
+
+Done
+
+## Notes
 
 1. Download static and bash script.
 2. Ran provided script: bash ltdis.sh statis.

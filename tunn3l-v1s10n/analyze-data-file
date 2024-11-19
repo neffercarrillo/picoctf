@@ -1,0 +1,22 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+my $DEBUG = 1;
+
+sub debug {
+    my ($message) = @_;
+    if ($DEBUG) {
+        print "DEBUG $message\n";        
+    }
+}
+
+while(<>) {
+    my @split_lines = split(/ /,$_);    
+    debug("line length is: " . length($_) . " " . "split lines count per line: " . $#split_lines);
+    for(@split_lines) {
+        print $_ if $_ =~ /picoCTF/;
+    }
+        
+}

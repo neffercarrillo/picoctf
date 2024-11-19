@@ -6,6 +6,10 @@ Do you know how to move between directories and read files in the shell? Start t
 
 Additional details will be available after launching your challenge instance.
 
+## Status
+
+Done
+
 ## Steps Taken
 1. Launched container.
 2. ssh'd into the box as instructed.

@@ -4,7 +4,11 @@
 
 Matryoshka dolls are a set of wooden dolls of decreasing size placed one inside another. What's the final one? Image: this
 
-## Steps Taken
+## Status
+
+Done
+
+## Notes
 
 1. Downloaded image.
 2. Ran strings command and found an interesting string: base_images/2_c.jpgUT

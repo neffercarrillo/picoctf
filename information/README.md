@@ -4,6 +4,10 @@
 
 Files can always be changed in a secret way. Can you find the flag?
 
+## Status
+
+Done
+
 ## Done
 
 1. Use exif tool to look at the metadata of the image.

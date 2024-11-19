@@ -8,7 +8,11 @@ Additional details will be available after launching your challenge instance.
 
 Can you ssh as ctf-player to titan.picoctf.net at port 65106 to get the flag? You'll also need the password f3b61b38. If asked, accept the fingerprint with yes.
 
-## Done
+## Status
+
+Done
+
+## Notes
 
 1. Executed shell command.
 '''
